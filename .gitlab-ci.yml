@@ -53,7 +53,7 @@ build-and-test-job:
       alias: sonarqube
 
   script:
-    - mvn clean $MAVEN_CLI_OPTS verify sonar:sonar -Dsonar.host.url=http://sonarqube:9000
+    - mvn clean $MAVEN_CLI_OPTS verify sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=sonar.login -Dsonar.password=sonar.login
 
 
 

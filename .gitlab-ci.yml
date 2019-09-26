@@ -49,7 +49,7 @@ build-and-test-job:
 
   services:
     # https://hub.docker.com/_/sonarqube
-    - name: sonarqube:7.9-community
+    - name: sonarqube
       alias: sonarqube
 
   script:

@@ -11,9 +11,7 @@ addons:
       secure: "dhS60UjFRU6lac0XmhqTGrR/+zL7/1AIfNvUklilI87NZJbI1NBTjqwevz+rDMiIhpu1evWpSNiaOhorAkm62rkvsOsGCUDq2vTcuUznAE+qL54WOSs9u/f3wNSRY48nj3Cil2rOD6J5NknwlwLB0SheMw60hjek9UW6lDFSHyqpyQQIDMTOTQgbTomArUMWdqYCb/Yu8DwDNN0t7j3rq8W5v3qhn91DPa6uFvMApZWaQsMX/w4j7P2twHnl8fI3533iZS5w7bzZByFfCvOiAC5kwJE6SUkOS9Ctm1GtpBCpynOha+YFSzhZUMWPznbllpp81lEFMkDQG4rdlnDvTq5S/PvGLbej9c10/itpPMj+X+NsJFOgJygv9jUl0298sYMCHmgGm8Lqe6U7VlRbkg1z/ZLhURGyoG9JDHQ8sO2cozeaCvnjMOzEVSCCj6u+SiVgIs3DutNzwNj/V7RZTEYI+jtvzmh53sdN4oyZzAmzfsLTpwhuqAnOH8IC9EDlPYIzriC4QIvIyeVHGWHJt/b775qNxaOQ08dMrgHd2loEEqvV+vRNJsYYISf2hWOnSr05+i0d7edp9s4VM3ZSu+5B6qiRBB+GY79/1qwjcwAUrCs4auu49dex27yH50YGYvrAXQYPgOa2215o+QHNEeu5zR+1o8EL2kf4pfK1OhA=" # encrypted value of your token
 
 script:
-  #- mvn clean verify sonar:sonar -Pcoverage -Dsonar.projectKey=teste-alura
-  #- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=teste-alura_forun
-  - mvn clean verify sonar:sonar
+  - mvn clean verify jacoco:report coveralls:report sonar:sonar
 
 deploy: #https://docs.travis-ci.com/user/deployment/heroku
   provider: heroku

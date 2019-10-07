@@ -15,15 +15,17 @@ public class DetalhesDoTopicoDto {
 	private String mensagem;
 	private LocalDateTime dataCriacao;
 	private String nomeAutor;
+	private String nomeCurso;
 	private StatusTopico status;
 	private List<RespostaDto> respostas;
-	
+
 	public DetalhesDoTopicoDto(Topico topico) {
 		this.id = topico.getId();
 		this.titulo = topico.getTitulo();
 		this.mensagem = topico.getMensagem();
 		this.dataCriacao = topico.getDataCriacao();
-		this.nomeAutor = topico.getAutor().getNome();
+    this.nomeAutor = topico.getAutor().getNome();
+    this.nomeCurso = topico.getCurso().getNome();
 		this.status = topico.getStatus();
 		this.respostas = new ArrayList<>();
 		this.respostas.addAll(topico.getRespostas().stream().map(RespostaDto::new).collect(Collectors.toList()));
@@ -49,6 +51,10 @@ public class DetalhesDoTopicoDto {
 		return nomeAutor;
 	}
 
+	public String getNomeCurso() {
+		return nomeCurso;
+	}
+
 	public StatusTopico getStatus() {
 		return status;
 	}
@@ -56,5 +62,5 @@ public class DetalhesDoTopicoDto {
 	public List<RespostaDto> getRespostas() {
 		return respostas;
 	}
-	
+
 }

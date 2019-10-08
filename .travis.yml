@@ -1,26 +1,25 @@
 language: java
-
 sudo: false
-
 jdk: openjdk8
+
+env:
+  - IMAGEM_DOCKER=alura/forun
 
 addons:
   sonarcloud:
     organization: teste-alura
     token:
-      secure: "dhS60UjFRU6lac0XmhqTGrR/+zL7/1AIfNvUklilI87NZJbI1NBTjqwevz+rDMiIhpu1evWpSNiaOhorAkm62rkvsOsGCUDq2vTcuUznAE+qL54WOSs9u/f3wNSRY48nj3Cil2rOD6J5NknwlwLB0SheMw60hjek9UW6lDFSHyqpyQQIDMTOTQgbTomArUMWdqYCb/Yu8DwDNN0t7j3rq8W5v3qhn91DPa6uFvMApZWaQsMX/w4j7P2twHnl8fI3533iZS5w7bzZByFfCvOiAC5kwJE6SUkOS9Ctm1GtpBCpynOha+YFSzhZUMWPznbllpp81lEFMkDQG4rdlnDvTq5S/PvGLbej9c10/itpPMj+X+NsJFOgJygv9jUl0298sYMCHmgGm8Lqe6U7VlRbkg1z/ZLhURGyoG9JDHQ8sO2cozeaCvnjMOzEVSCCj6u+SiVgIs3DutNzwNj/V7RZTEYI+jtvzmh53sdN4oyZzAmzfsLTpwhuqAnOH8IC9EDlPYIzriC4QIvIyeVHGWHJt/b775qNxaOQ08dMrgHd2loEEqvV+vRNJsYYISf2hWOnSr05+i0d7edp9s4VM3ZSu+5B6qiRBB+GY79/1qwjcwAUrCs4auu49dex27yH50YGYvrAXQYPgOa2215o+QHNEeu5zR+1o8EL2kf4pfK1OhA=" # encrypted value of your token
+      secure: "dhS60UjFRU6lac0XmhqTGrR/+zL7/1AIfNvUklilI87NZJbI1NBTjqwevz+rDMiIhpu1evWpSNiaOhorAkm62rkvsOsGCUDq2vTcuUznAE+qL54WOSs9u/f3wNSRY48nj3Cil2rOD6J5NknwlwLB0SheMw60hjek9UW6lDFSHyqpyQQIDMTOTQgbTomArUMWdqYCb/Yu8DwDNN0t7j3rq8W5v3qhn91DPa6uFvMApZWaQsMX/w4j7P2twHnl8fI3533iZS5w7bzZByFfCvOiAC5kwJE6SUkOS9Ctm1GtpBCpynOha+YFSzhZUMWPznbllpp81lEFMkDQG4rdlnDvTq5S/PvGLbej9c10/itpPMj+X+NsJFOgJygv9jUl0298sYMCHmgGm8Lqe6U7VlRbkg1z/ZLhURGyoG9JDHQ8sO2cozeaCvnjMOzEVSCCj6u+SiVgIs3DutNzwNj/V7RZTEYI+jtvzmh53sdN4oyZzAmzfsLTpwhuqAnOH8IC9EDlPYIzriC4QIvIyeVHGWHJt/b775qNxaOQ08dMrgHd2loEEqvV+vRNJsYYISf2hWOnSr05+i0d7edp9s4VM3ZSu+5B6qiRBB+GY79/1qwjcwAUrCs4auu49dex27yH50YGYvrAXQYPgOa2215o+QHNEeu5zR+1o8EL2kf4pfK1OhA="
 
 script:
-  #- mvn clean verify sonar:sonar -Pcoverage -Dsonar.projectKey=teste-alura
-  #- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=teste-alura_forun
-  - mvn clean verify sonar:sonar
+  - mvn clean verify cobertura:cobertura coveralls:report sonar:sonar
 
-deploy: #https://docs.travis-ci.com/user/deployment/heroku
-  provider: heroku
-  api_key:
-    secure: DxcaJI+CxjzlFTET8Jd5uMHx8nLUNNhTmSlZZmUr0sGI20QlVcgboBfWq/YQe3VXJS7p2z2FdlfJdG87KJOPqssb5lIIKUtvpkHjx5zZIu4rK0izzeOIr/G2Qkfjj9CEkSNhk7Ryk/FgfwnUSHpYNbq5CdASbvi6xq5oLyEDIp8y42hHLV5SPMFhT8OQj8dh2Ve8EpmVrJpIZzMJSW2ECnM0noNqJeesahrckgHYlAcm90+fTrl1SYMQk30r56aeeNWl4LnQH1pvjiRqlajCSOBgB+CnV8SplWCg37sOedpSBzOQr/52AGoMbqxwRB7XCU9D1SToKMpSnZ+P9KJwh3AjCCUmve4q6SS+9DCyOitEhjQVqX0tst4g3XteX2iqBVCQz4K/EghkJQtyDeYTAvMUI1+hMppoLsNhvt4pWOX+7DhQpFZTuFx9K+lHbpdWH6DrasNcY+pkv7LKiPmbxD7b1JjGXY/47LQOWiEcmi1S32fXTILRCeP0ynkH40BHAO1pT8IY+MPxz8YGedYQ4Rb6lPfNYsLxlE/OcGpgFM1mLtR7uTAQ3qYxwlNigViefG7yPx0HVFJX9OVsx6y06Og+853QRVQWttbab5gWr7Z3wP6tMh2Ohz4cRmwfrjAWlPC6hlEsMSLP0sKzIhcCYqVKRzRMSVpUhWn4q1uyQFw=
-  app: alura-forun-api
-  on: master #default, eu acho
+deploy:
+  service: docker
+  script: deploy.sh
+  on:
+    all_branches: true
+    condition: $TRAVIS_BRANCH =~ ^(develop|release|master)$
 
 notifications: #https://docs.travis-ci.com/user/notifications/
   email:

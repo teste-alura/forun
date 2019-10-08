@@ -1,0 +1,32 @@
+stages:
+  - build
+#  - deploy
+
+build-and-test-job:
+  variables:
+    MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+    MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+    ### deprecated
+    # SONARQUBE_JDBC_USERNAME
+    # SONARQUBE_JDBC_PASSWORD
+    # SONARQUBE_JDBC_URL
+
+  cache:
+    paths:
+      - .m2/repository/
+      - target/
+
+  image: maven:3-jdk-8
+
+  services:
+    # https://hub.docker.com/_/sonarqube
+    - name: sonarqube:7.9-community
+      alias: sonarqube
+
+  stage: build
+
+  script:
+    - mvn clean $MAVEN_CLI_OPTS verify sonar:sonar -Dsonar.host.url=http://sonarqube:9000
+
+
+

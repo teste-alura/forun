@@ -32,7 +32,8 @@ echo DOCKER_USERNAME=[$DOCKER_USERNAME]
 TAG_DOCKER=$IMAGEM_DOCKER:$TRAVIS_TAG
 
 echo Passo 5...
-docker build --build-arg BUILD_DIR="$TRAVIS_BUILD_DIR" -t "$IMAGEM_DOCKER" .
+#docker build --build-arg BUILD_DIR="$TRAVIS_BUILD_DIR" -t "$IMAGEM_DOCKER" .
+docker build -t "$IMAGEM_DOCKER" .
 
 echo Passo 6...
 docker tag "$IMAGEM_DOCKER" "$TAG_DOCKER"

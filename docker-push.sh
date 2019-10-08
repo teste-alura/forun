@@ -1,27 +1,27 @@
 #!/bin/bash
 echo Passo 1...
-if ! [[ $TRAVIS_BRANCH =~ ^(develop|release|master)$ ]]
+if ! [[ $TRAVIS_BRANCH =~ ^(develop|release|master)$ ]]; then
   echo "Este script é para uso com branches develop, release ou master apenas, não $TRAVIS_BRANCH"
   exit 1
 fi
 
 echo Passo 2...
-if [[ $IMAGEM_DOCKER == '' ]]
+if [[ $IMAGEM_DOCKER == '' ]]; then
   echo "Varivável IMAGEM_DOCKER não definida"
   exit 2
 fi
 
 echo Passo 3...
-if [[ $TRAVIS_BRANCH =~ ^(release|master)$ && $TRAVIS_TAG == '' ]]
+if [[ $TRAVIS_BRANCH =~ ^(release|master)$ && $TRAVIS_TAG == '' ]]; then
   echo "Nenhuma tag associada"
   exit 3
 fi
 
 echo Passo 4...
-if [[ $TRAVIS_BRANCH =~ ^(develop|release)$ ]]
+if [[ $TRAVIS_BRANCH =~ ^(develop|release)$ ]]; then
   TAG_DOCKER=$IMAGEM_DOCKER:$TRAVIS_BRANCH
 else
-  TAG_DOCKER=$IMAGEM_DOCKER:$TRAVIS_TAG
+  TAG_DOCKER=$IMAGEM_DOCKER:$TRAVIS_TAG # e a tag latest??
 fi
 
 echo Passo 5...

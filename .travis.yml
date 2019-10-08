@@ -15,7 +15,7 @@ services:
   - docker
 
 script:
-  - mvn clean verify cobertura:cobertura coveralls:cobertura sonar:sonar
+  - mvn clean verify cobertura:cobertura coveralls:report sonar:sonar
 
 deploy:
   provider: script

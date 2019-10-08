@@ -3,7 +3,7 @@ sudo: false
 jdk: openjdk8
 
 env:
-  - IMAGEM_DOCKER=alura/forun
+  - IMAGEM_DOCKER=s1dn3y/alura-forun
 
 addons:
   sonarcloud:
@@ -15,18 +15,38 @@ services:
   - docker
 
 script:
-  - mvn clean verify cobertura:cobertura coveralls:report sonar:sonar
+  - mvn clean verify cobertura:cobertura coveralls:cobertura sonar:sonar
 
 deploy:
   provider: script
   script: bash docker-push.sh
   on:
-    all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^(develop|release|master)$
+    branches:
+      - develop
+      - release
+      - master
 
-notifications: #https://docs.travis-ci.com/user/notifications/
-  email:
-    recipients:
-    - sidney@teclatab.com.br
-    on_success: always
-    on_failure: always
+#notifications:
+#  email:
+#    if: branch = develop
+#    recipients:
+#      - devs@servidor.com.br
+#    on_success: never
+#    on_failure: always
+#
+#  email:
+#    if: branch = release
+#    recipients:
+#      - devs@servidor.com.br
+#      - sm@servidor.com.br
+#      - qa@servidor.com.br
+#    on_success: change
+#    on_failure: always
+#
+#  email:
+#    if: branch = master
+#    recipients:
+#      - sm@servidor.com.br
+#      - po@servidor.com.br
+#    on_success: change
+#    on_failure: always

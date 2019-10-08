@@ -4,30 +4,32 @@ echo IMAGEM_DOCKER=[$IMAGEM_DOCKER]
 echo TRAVIS_TAG=[$TRAVIS_TAG]
 echo DOCKER_USERNAME=[$DOCKER_USERNAME]
 
-echo Passo 1...
-if ! [[ $TRAVIS_BRANCH =~ ^(develop|release|master)$ ]]; then
-  echo "Erro: este script é para uso com branches develop, release ou master apenas, não $TRAVIS_BRANCH"
-  exit 1
-fi
+#echo Passo 1...
+#if ! [[ $TRAVIS_BRANCH =~ ^(develop|release|master)$ ]]; then
+#  echo "Erro: este script é para uso com branches develop, release ou master apenas, não $TRAVIS_BRANCH"
+#  exit 1
+#fi
+#
+#echo Passo 2...
+#if [[ $IMAGEM_DOCKER == '' ]]; then
+#  echo "Erro: varivável IMAGEM_DOCKER não definida"
+#  exit 2
+#fi
+#
+#echo Passo 3...
+#if [[ $TRAVIS_BRANCH =~ ^(release|master)$ && $TRAVIS_TAG == '' ]]; then
+#  echo "Erro: nenhuma tag associada ao commit"
+#  exit 3
+#fi
+#
+#echo Passo 4...
+#if [[ $TRAVIS_BRANCH =~ ^(develop|release)$ ]]; then
+#  TAG_DOCKER=$IMAGEM_DOCKER:$TRAVIS_BRANCH
+#else
+#  TAG_DOCKER=$IMAGEM_DOCKER:$TRAVIS_TAG
+#fi
 
-echo Passo 2...
-if [[ $IMAGEM_DOCKER == '' ]]; then
-  echo "Erro: varivável IMAGEM_DOCKER não definida"
-  exit 2
-fi
-
-echo Passo 3...
-if [[ $TRAVIS_BRANCH =~ ^(release|master)$ && $TRAVIS_TAG == '' ]]; then
-  echo "Erro: nenhuma tag associada ao commit"
-  exit 3
-fi
-
-echo Passo 4...
-if [[ $TRAVIS_BRANCH =~ ^(develop|release)$ ]]; then
-  TAG_DOCKER=$IMAGEM_DOCKER:$TRAVIS_BRANCH
-else
-  TAG_DOCKER=$IMAGEM_DOCKER:$TRAVIS_TAG
-fi
+TAG_DOCKER=$IMAGEM_DOCKER:$TRAVIS_TAG
 
 echo Passo 5...
 docker build -t "$IMAGEM_DOCKER" .

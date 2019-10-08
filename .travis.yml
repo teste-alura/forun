@@ -27,7 +27,7 @@ deploy:
 #      - master
   on:
     all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^(develop|release|master)$
+#    condition: $TRAVIS_BRANCH =~ ^(develop|release|master)$
 
 
 

@@ -21,7 +21,10 @@ deploy:
   provider: script
   script: bash docker-push.sh
   on:
-    branch: /^(develop|release|master)$/
+    branch:
+      - develop
+      - release
+      - master
 
 #notifications:
 #  email:

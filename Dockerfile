@@ -1,7 +1,9 @@
 FROM java:8
 
+ARG BUILD_DIR
+
 WORKDIR /usr/app
-COPY target/forum-0.0.1-SNAPSHOT.jar .
+COPY $BUILD_DIR/target/forum-0.0.1-SNAPSHOT.jar .
 
 EXPOSE 8080
 

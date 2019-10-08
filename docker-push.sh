@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if ! [[ $TRAVIS_BRANCH =~ ^(develop|release|master)$ ]]
   echo "Este script é para uso com branches develop, release ou master apenas, não $TRAVIS_BRANCH"
   exit 1

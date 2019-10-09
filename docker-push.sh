@@ -4,6 +4,8 @@ terminarEmCasoDeErro () {
   if (( $1 != 0 )); then exit $1; fi
 }
 
+echo \>\> git branch --contains $TRAVIS_COMMIT: `git branch --contains $TRAVIS_COMMIT`
+
 COMMIT_BRANCHES=`git branch --contains $TRAVIS_COMMIT | tr -d \\n | tr -d \* 2> /dev/null` # branches (separados por espaço) que apontam para commit
 COMMIT_TAG=`git describe --tags --exact-match $TRAVIS_COMMIT 2> /dev/null`
 

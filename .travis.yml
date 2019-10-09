@@ -3,7 +3,7 @@ sudo: false
 jdk: openjdk8
 
 env:
-  - IMAGEM_DOCKER=s1dn3y/alura-forun
+  - DOCKER_IMAGEM=s1dn3y/alura-forun
 
 addons:
   sonarcloud:

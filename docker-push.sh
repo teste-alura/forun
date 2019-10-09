@@ -5,6 +5,9 @@ terminarEmCasoDeErro () {
 }
 
 echo \>\> git branch --contains $TRAVIS_COMMIT: `git branch --contains $TRAVIS_COMMIT`
+echo \>\> git branch --points-at $TRAVIS_COMMIT: `git branch --points-at $TRAVIS_COMMIT`
+echo \>\> git branch -r --contains $TRAVIS_COMMIT: `git branch --contains $TRAVIS_COMMIT`
+echo \>\> git branch -r --points-at $TRAVIS_COMMIT: `git branch --points-at $TRAVIS_COMMIT`
 
 COMMIT_BRANCHES=`git branch --contains $TRAVIS_COMMIT | tr -d \\n | tr -d \* 2> /dev/null` # branches (separados por espaço) que apontam para commit
 COMMIT_TAG=`git describe --tags --exact-match $TRAVIS_COMMIT 2> /dev/null`

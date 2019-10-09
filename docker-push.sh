@@ -4,12 +4,7 @@ terminarEmCasoDeErro () {
   if (( $1 != 0 )); then exit $1; fi
 }
 
-echo \>\> git branch --contains $TRAVIS_COMMIT: `git branch --contains $TRAVIS_COMMIT`
-echo \>\> git branch --points-at $TRAVIS_COMMIT: `git branch --points-at $TRAVIS_COMMIT`
-echo \>\> git branch -r --contains $TRAVIS_COMMIT: `git branch --contains $TRAVIS_COMMIT`
-echo \>\> git branch -r --points-at $TRAVIS_COMMIT: `git branch --points-at $TRAVIS_COMMIT`
-
-COMMIT_BRANCHES=`git branch --contains $TRAVIS_COMMIT | tr -d \\n | tr -d \* 2> /dev/null` # branches (separados por espaço) que apontam para commit
+COMMIT_LISTA_BRANCH=`git branch --contains $TRAVIS_COMMIT | tr -d '\n' | tr -d '*' | sed 's/(.*)//g' | xargs 2> /dev/null`
 COMMIT_TAG=`git describe --tags --exact-match $TRAVIS_COMMIT 2> /dev/null`
 
 echo TRAVIS_COMMIT=[$TRAVIS_COMMIT]
@@ -17,7 +12,7 @@ echo TRAVIS_BRANCH=[$TRAVIS_BRANCH]
 echo DOCKER_IMAGEM=[$DOCKER_IMAGEM]
 echo TRAVIS_TAG=[$TRAVIS_TAG]
 echo DOCKER_USERNAME=[$DOCKER_USERNAME]
-echo COMMIT_BRANCHES=[$COMMIT_BRANCHES]
+echo COMMIT_LISTA_BRANCH=[$COMMIT_LISTA_BRANCH]
 echo COMMIT_TAG=[$COMMIT_TAG]
 
 echo Passo 1...
@@ -29,11 +24,11 @@ fi
 
 echo Passo 2...
 
-if [[ "$COMMIT_BRANCHES" =~ master ]]; then
+if [[ "$COMMIT_LISTA_BRANCH" =~ master ]]; then
   COMMIT_BRANCH=master
-elif [[ "$COMMIT_BRANCHES" =~ release ]]; then
+elif [[ "$COMMIT_LISTA_BRANCH" =~ release ]]; then
   COMMIT_BRANCH=release
-elif [[ "$COMMIT_BRANCHES" =~ develop ]]; then
+elif [[ "$COMMIT_LISTA_BRANCH" =~ develop ]]; then
   COMMIT_BRANCH=develop
 else
   echo "Erro: este script é deploy dos branches develop, release ou master apenas"

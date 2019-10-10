@@ -15,7 +15,7 @@ if [[ $DOCKER_IMAGEM == '' ]]; then
   exit 1
 fi
 
-COMMIT_BRANCHES_E_TAGS=`git ls-remote | grep $TRAVIS_COMMIT | sed 's/.*\///g' | tr '\n' ' ' 2> /dev/null`
+COMMIT_BRANCHES_E_TAGS=`git ls-remote | grep $TRAVIS_COMMIT | sed 's/.*\///g' | tr '\n' ' ' | xargs 2> /dev/null`
 COMMIT_TAG=`echo $COMMIT_BRANCHES_E_TAGS | tr -s '[:space:]' '\n' | grep -i 'v[0-9]\+\.[0-9]\+\.[0-9]\+' | tr '\n' ' ' | xargs 2> /dev/null`
 
 echo COMMIT_BRANCHES_E_TAGS=[$COMMIT_BRANCHES_E_TAGS]

@@ -28,9 +28,6 @@ deploy:
 #      - master
   on:
     all_branches: true
-#    condition: $TRAVIS_BRANCH =~ ^(develop|release|master)$
-
-
 
 #notifications:
 #  email:

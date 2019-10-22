@@ -15,7 +15,7 @@ services:
   - docker
 
 script:
-  - mvn clean verify jacoco:report coveralls:report sonar:sonar
+  - mvn clean verify jacoco:report coveralls:report sonar:sonar -Dsonar.projectKey=teste-alura_forun
 
 deploy:
   skip_cleanup: true

@@ -68,4 +68,4 @@ echo Passo 8...
 docker push "$DOCKER_TAG"
 terminarEmCasoDeErro $?
 
-echo Fim
+echo Final!!!

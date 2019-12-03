@@ -22,12 +22,17 @@ deploy:
     branch: master
   skip_cleanup: true
   provider: script
-  script: bash docker_push.sh
+  script: bash docker-push.sh
 
   email:
     if: branch = master
     recipients:
-      - sm-alura-forum@alura.com.br
+      - scrummaster-alura-forum@alura.com.br
       - po-alura-forum@alura.com.br
+    on_success: change
+    on_failure: always
+
+  email:
+    if: branch = develop
     on_success: change
     on_failure: always

@@ -1,5 +1,5 @@
 language: java
-sudo: false
+
 jdk: openjdk8
 
 env:
@@ -18,39 +18,16 @@ script:
   - mvn clean verify jacoco:report coveralls:report sonar:sonar -Dsonar.projectKey=teste-alura_forun
 
 deploy:
+  on:
+    branch: master
   skip_cleanup: true
   provider: script
-  script: bash docker-push.sh
-  on:
-    all_branches: true # necessário pq o travis trata tags como branches
+  script: bash docker_push
 
-notifications:
-  slack:
-    rooms:
-      secure: IqRxqopasPRep4bbwiuDV/hTSjZB5idOtt84Tf1zjKGmVRR0kBUYEUDOKez7dbsOzTAntbCPXkFU+VdnXO5U+/OdLM7qJSlnBzGgkjvwFqa+EVLILA+0VhqLPK7WuN4CbhSZF7H1KRV5HsxBO9NhDpDbypVFaY8F4AgV4VDywN2w12oj1AMUs/SIctQktq5bj5cuQz+5jlDoFpCMRXYMg7ftIzN7vPoGAVNMjLSbJWgmcXTHf2yfYkOcSKdh3ZpUP3Ox3fYijnqk+bFou07WSZL1MWCPgy7T60FwyWM8IVyb2OjI8ndyAlsmE1gEEPyOJXHZaJmkkMp83EndJ4v0bfgiGTkFLaMPF9TlX+DgRtXkD5n9HM9uL740SYa6VrxZToLSzU7kaasoCBRSheVLmrDOijoisuW9iVAtqKwhGNtIlbbO9d9DC+zoYP1l4RyCzDCXOir4cun8a85lRmLhs7NT0C+uj7aEnhlIGs2G5uYxKTtWmpui+wC838DRPkuTt8ks3ol1c/qdx01Sd5nziUI4ExfKBNd/U68my8nyPkuhTAKZZNuIL/EjW/ajLEwzactoo/grgolcA7mmdv1l7Js0dFypPhd02nr5Mj/E1OThHbszOlAbA06Zmfa2d/s35oLc6zXMGxNrommiLTsnmuiAazmHdQPityBb8Lanwlo=
-    on_success: always
-
-#notifications:
-#  email:
-#    if: branch = develop
-#    recipients:
-#      - devs@servidor.com.br
-#    on_success: never
-#    on_failure: always
-#
-#  email:
-#    if: branch = release
-#    recipients:
-#      - devs@servidor.com.br
-#      - sm@servidor.com.br
-#      - qa@servidor.com.br
-#    on_success: change
-#    on_failure: always
-#
-#  email:
-#    if: branch = master
-#    recipients:
-#      - sm@servidor.com.br
-#      - po@servidor.com.br
-#    on_success: change
-#    on_failure: always
+  email:
+    if: branch = master
+    recipients:
+      - sm-alura-forum@alura.com.br
+      - po-alura-forum@alura.com.br
+    on_success: change
+    on_failure: always

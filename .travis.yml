@@ -24,15 +24,18 @@ deploy:
   provider: script
   script: bash docker-push.sh
 
+notifications:
   email:
     if: branch = master
     recipients:
-      - scrummaster-alura-forum@alura.com.br
-      - po-alura-forum@alura.com.br
+      - scrummaster@alura.com.br
+      - po@alura.com.br
     on_success: change
     on_failure: always
 
   email:
     if: branch = develop
+    recipients:
+      - dev-team@alura.com.br
     on_success: change
     on_failure: always
